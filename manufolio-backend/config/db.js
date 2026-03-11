@@ -4,7 +4,7 @@ const db = mysql.createPool({
     host: "localhost",
     user: "root",
     password: "root",
-    database: "portfolio_db",
+    database: "manufolio",
     connectionLimit: 10
 });
 

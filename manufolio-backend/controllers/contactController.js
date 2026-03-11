@@ -1,14 +1,14 @@
 const db = require("../config/db");
 
 exports.submitContact = (req, res) => {
-    const { name, email, message } = req.body;
+    const { name, email, phone, message } = req.body;
 
     const sql = `
-    INSERT INTO contacts (name, email, message)
-    VALUES (?, ?, ?)
+    INSERT INTO contacts (name, email, phone, message)
+    VALUES (?, ?, ?, ?)
     `;
 
-    db.query(sql, [name, email, message], (err, result) => {
+    db.query(sql, [name, email, phone, message], (err, result) => {
         if (err) return res.status(500).json(err);
         res.json({ message: "Contact message saved successfully" });
     });

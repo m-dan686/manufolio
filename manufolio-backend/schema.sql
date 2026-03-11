@@ -76,6 +76,7 @@ CREATE TABLE contacts (
     contact_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(150),
     email VARCHAR(150),
+    phone VARCHAR(20),
     message TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

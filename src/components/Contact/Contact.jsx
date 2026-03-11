@@ -7,6 +7,35 @@ export default function Contact() {
     const rightRef = useRef(null);
     const cursorRef = useRef(null);
     const [sent, setSent] = useState(false);
+    const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
+
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch("http://localhost:5000/api/contact/submit", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name: formData.name,
+                    email: formData.email,
+                    phone: formData.phone,
+                    message: formData.message
+                })
+            });
+            if (response.ok) {
+                setSent(true);
+                setFormData({ name: '', email: '', phone: '', message: '' });
+            } else {
+                console.error("Error sending message");
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     useEffect(() => {
         // Wrapped in context for React Strict Mode safety
@@ -77,16 +106,34 @@ export default function Contact() {
                 {/* RIGHT */}
                 <div ref={rightRef} className="contact-right">
                     {!sent ? (
-                        <form
-                            onSubmit={(e) => {
-                                e.preventDefault();
-                                setSent(true);
-                            }}
-                        >
-                            <input placeholder="Your Name" required />
-                            <input type="email" placeholder="Email Address" required />
-                            <input type="tel" placeholder="Phone Number" required />
+                        <form onSubmit={handleSubmit}>
+                            <input
+                                name="name"
+                                value={formData.name}
+                                onChange={handleChange}
+                                placeholder="Your Name"
+                                required
+                            />
+                            <input
+                                type="email"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                placeholder="Email Address"
+                                required
+                            />
+                            <input
+                                type="tel"
+                                name="phone"
+                                value={formData.phone}
+                                onChange={handleChange}
+                                placeholder="Phone Number"
+                                required
+                            />
                             <textarea
+                                name="message"
+                                value={formData.message}
+                                onChange={handleChange}
                                 rows={6}
                                 className="min-h-[180px] resize-none"
                                 placeholder="How can I help you?"
