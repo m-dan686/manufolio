@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import ParticleBackground from "../components/animations/ParticleBackground";
 import { FiDownload, FiArrowRight } from "react-icons/fi";
 
 gsap.registerPlugin(MotionPathPlugin, ScrollTrigger);
@@ -59,7 +58,7 @@ const Home = () => {
             });
 
             gsap.to(".orbit-ring-green", {
-                boxShadow: "0 0 70px rgba(34,197,94,0.8)",
+                boxShadow: "0 0 70px rgba(16, 185, 129, 0.4)",
                 scrollTrigger: {
                     trigger: containerRef.current,
                     scrub: true,
@@ -117,7 +116,7 @@ const Home = () => {
             });
 
             gsap.to(".orbiting-certificates", {
-                boxShadow: "0 0 60px rgba(34,197,94,0.8)",
+                boxShadow: "0 0 60px rgba(16, 185, 129, 0.4)",
                 repeat: -1,
                 yoyo: true,
                 duration: 2,
@@ -126,15 +125,40 @@ const Home = () => {
 
             /* ================= CTA GLOW ================= */
             gsap.utils.toArray(".hero-cta").forEach((btn) => {
-                btn.addEventListener("mouseenter", () =>
+                const isGreen = btn.classList.contains("border-green");
+                const glowColor = isGreen ? "rgba(16, 185, 129, 0.5)" : "rgba(255,115,0,0.7)";
+
+                btn.addEventListener("mouseenter", () => {
                     gsap.to(btn, {
-                        boxShadow: "0 0 40px rgba(255,115,0,0.7)",
+                        boxShadow: `0 0 40px ${glowColor}`,
                         duration: 0.3,
-                    })
-                );
-                btn.addEventListener("mouseleave", () =>
-                    gsap.to(btn, { boxShadow: "0 0 0 rgba(0,0,0,0)", duration: 0.4 })
-                );
+                    });
+
+                    const icon = btn.querySelector("svg");
+                    if (icon) {
+                        gsap.to(icon, {
+                            scale: 1.2,
+                            y: isGreen ? 2 : 0,
+                            x: isGreen ? 0 : 4,
+                            duration: 0.3,
+                            ease: "back.out(2)"
+                        });
+                    }
+                });
+
+                btn.addEventListener("mouseleave", () => {
+                    gsap.to(btn, { boxShadow: "0 0 0 rgba(0,0,0,0)", duration: 0.4 });
+
+                    const icon = btn.querySelector("svg");
+                    if (icon) {
+                        gsap.to(icon, {
+                            scale: 1,
+                            y: 0,
+                            x: 0,
+                            duration: 0.3
+                        });
+                    }
+                });
             });
 
             /* ================= FLOATING NODES ================= */
@@ -185,8 +209,6 @@ const Home = () => {
             ref={containerRef}
             className="relative min-h-[90vh] flex items-center overflow-hidden"
         >
-            <ParticleBackground />
-
             <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center relative z-10">
                 {/* LEFT */}
                 <div className="space-y-6">
@@ -198,11 +220,16 @@ const Home = () => {
                         Manu Anandan
                     </h1>
                     <h2 className="hero-subtext text-3xl opacity-80">
-                        <span className="text-orange">Full‑Stack</span> Developer
+                        <span className="text-orange">Aspiring Machine Learning Engineer | AI Developer</span>
                     </h2>
-                    <p className="hero-subtext opacity-60 max-w-lg">
-                        I specialize in building secure <strong>Spring Boot backends</strong> with JWT, RBAC, and Swagger UI,
-                        while crafting animated, responsive <strong>React frontends</strong> powered by GSAP, Three.js, and Tailwind CSS.
+                    <p className="hero-subtext opacity-60 max-w-lg text-justify">
+                        Motivated and Hardworking Information Technology student with a strong
+                        interest in Artificial Intelligence, Machine Learning, and software
+                        development. Passionate about building intelligent systems and data-driven
+                        applications that solve real-world problems. Experienced in developing AI-based academic projects, data analysis models, and web applications. A
+                        collaborative learner with strong analytical thinking and problem-solving
+                        abilities, seeking opportunities to apply technical knowledge and
+                        continuously expand skills in AI and emerging technologies.
                     </p>
                     <p className="hero-subtext opacity-60 max-w-lg">
                         Currently pursuing <strong>Information Technology</strong> at Sri Krishna College of Technology, Coimbatore,
@@ -223,14 +250,16 @@ const Home = () => {
                             View Work <FiArrowRight />
                         </Link>
 
-                        <Link
-                            to="/downloads"
+                        <a
+                            href="/files/Manu Anandan G - Resume.pdf"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             onMouseMove={handleMagneticHover}
                             onMouseLeave={handleMagneticLeave}
                             className="hero-cta px-8 py-4 border-2 border-green text-green rounded-full font-bold flex items-center gap-2"
                         >
                             Resume <FiDownload />
-                        </Link>
+                        </a>
                     </div>
                 </div>
 
@@ -247,7 +276,7 @@ const Home = () => {
                         className="relative w-72 h-72 rounded-full overflow-hidden border-4 border-bg-light shadow-2xl cursor-pointer"
                     >
                         <img
-                            src="/files/portfolio_images/photo.jpg"
+                            src="/files/portfolio_images/photo.jpeg"
                             alt="Manu"
                             className="w-full h-full object-cover"
                         />

@@ -30,5 +30,29 @@ export const projectsData = [
         tech: ["React", "Node.js", "Sensors", "Analytics"],
         image: "/files/portfolio_images/twinscape.jpeg",
         pptEmbed: "https://docs.google.com/presentation/d/1OEqpajpkEYJACmRhtyn0dTCfYqV2X4Mz/embed?start=false&loop=false&delayms=3000"
+    },
+    {
+        id: 5,
+        title: "GN MedCare – Medicine Demand Prediction",
+        description: "A machine learning based healthcare analytics system that predicts medicine demand and analyzes sales patterns to help pharmacies and medical stores manage inventory efficiently.",
+        tech: ["Python", "Machine Learning", "Linear Regression", "Data Analytics"],
+        image: "/files/portfolio_images/medcare.png",
+        pptEmbed: "https://docs.google.com/presentation/d/1b1jt3hv_rLMZVJRzolW4siABK0VcEZ4s/embed?start=false&loop=false&delayms=3000"
+    },
+    {
+        id: 6,
+        title: "SkillMatch AI – Intelligent Career Matching Platform",
+        description: "An AI-powered platform that analyzes user skills and matches them with suitable career paths and opportunities, helping individuals make data-driven career decisions.",
+        tech: ["React", "AI", "Machine Learning", "JavaScript"],
+        image: "/files/portfolio_images/skillmatch.jpeg",
+        pptEmbed: "https://docs.google.com/presentation/d/1Ndivo9P74N-Ne5gIX4w8QQj9bFpYuNNB/embed?start=false&loop=false&delayms=3000"
+    },
+    {
+        "id": 7,
+        "title": "AI Transparency and Data Usage Control System",
+        "description": "A platform designed to improve transparency in AI systems by allowing users to monitor, control, and understand how their personal data is collected, processed, and used by AI models. It provides clear insights into data usage, enhances privacy protection, and ensures responsible AI practices.",
+        "tech": ["React", "AI", "Machine Learning", "JavaScript"],
+        "image": "/files/portfolio_images/ai_transperancy.jpg",
+        "pptEmbed": "https://docs.google.com/presentation/d/17GfsxQ_cyhWZB02Ij6O8ObMIhgqytRjU/embed?slide=id.p1"
     }
 ];

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import Navbar from './components/navbar/Navbar';
 import Footer from './components/footer/Footer';
 import AppRoutes from './router';
@@ -6,9 +7,12 @@ import gsap from 'gsap';
 import ScrollToTop from './components/utils/ScrollToTop';
 import CursorFollower from './components/animations/CursorFollower';
 import PageLoader from './components/animations/PageLoader';
+import ParticleBackground from './components/animations/ParticleBackground';
 import './utils/animations.gsap';
 
 function App() {
+    const location = useLocation();
+    const isAdminMode = location.pathname.startsWith('/admin');
     // Cursor Glow Init
     React.useEffect(() => {
         const glow = document.createElement("div");
@@ -37,11 +41,12 @@ function App() {
             <PageLoader />
             <CursorFollower />
             <ScrollToTop />
-            <Navbar />
-            <main className="flex-grow pt-24 min-h-screen">
+            <ParticleBackground />
+            {isAdminMode ? null : <Navbar />}
+            <main className={`flex-grow min-h-screen ${isAdminMode ? 'pt-0' : 'pt-24'}`}>
                 <AppRoutes />
             </main>
-            <Footer />
+            {isAdminMode ? null : <Footer />}
         </div>
     );
 }

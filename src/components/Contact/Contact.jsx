@@ -85,6 +85,7 @@ export default function Contact() {
                         >
                             <input placeholder="Your Name" required />
                             <input type="email" placeholder="Email Address" required />
+                            <input type="tel" placeholder="Phone Number" required />
                             <textarea
                                 rows={6}
                                 className="min-h-[180px] resize-none"
